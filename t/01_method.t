@@ -26,18 +26,19 @@ subtest 'i want to read air' => sub {
     empty_air();
     my $del_kuuki = read_air('kuuki');
     ok( !defined $del_kuuki, 'kuuki kieta' );
-    $Acme::AirRead::NO_READ = qr{ky};
     write_air(
         air   => 'cant air',
         kuuki => 'yomenai',
+        tokyo => 'yomenai',
     );
 
+    local $Acme::AirRead::NO_READ = qr{ky};
     my $air = read_air('air');
     ok( defined $air, 'i can read air' );
     is( $air, 'cant air', 'yometayo-' );
     my $kuuki = read_air('kuuki');
     ok( defined $kuuki, 'i can read kuuki' );
-    my $ky = read_air('KY');
+    my $ky = read_air('tokyo');
     ok( !defined $ky, 'cant read ky' );
 };
 
