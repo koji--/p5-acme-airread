@@ -34,6 +34,7 @@ subtest 'i want to read air' => sub {
 
     my $air = read_air('air');
     ok( defined $air, 'i can read air' );
+    is( $air, 'cant air', 'yometayo-' );
     my $kuuki = read_air('kuuki');
     ok( defined $kuuki, 'i can read kuuki' );
     my $ky = read_air('KY');
