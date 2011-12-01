@@ -19,10 +19,13 @@ subtest 'write and read air' => sub {
     ok( !defined $luft, 'kann keine Luft lesen' );
     my $kuuki = read_air('kuuki');
     ok( defined $kuuki, 'get kuuki' );
+    is( $kuuki, 'yomenai', 'kuuki yometa' );
 };
 
 subtest 'i want to read air' => sub {
     empty_air();
+    my $del_kuuki = read_air('kuuki');
+    ok( !defined $del_kuuki, 'kuuki kieta' );
     $Acme::AirRead::NO_READ = qr{ky};
     write_air(
         air   => 'cant air',

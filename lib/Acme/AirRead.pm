@@ -1,6 +1,6 @@
 package Acme::AirRead;
 
-use 5.014;
+use strict;
 use warnings;
 no strict 'refs';
 our $VERSION = '0.01';
@@ -17,22 +17,28 @@ sub read_air {
     my ($pkg) = caller(0);
     my $key = lc $_[0];
     return if $key =~ $NO_READ;
-    return *{ $pkg . '::AirRead::attr' . $_[0] };
+    my $namespace = $pkg . '::AirRead::attr';
+    if ( $namespace->can($_[0]) ) {
+        return *{ $pkg . '::AirRead::attr::' . $_[0] }->();
+    }
+    else {
+        return;
+    }
 }
 
 sub write_air {
     my ($pkg) = caller(0);
-    return if scalar @_;
+    return unless scalar @_;
     my %args = @_;
     foreach my $key ( sort keys %args ) {
         my $val = $args{$key};
-        *{ $pkg . '::AirRead::attr' . $key } = $val;
+        *{ $pkg . '::AirRead::attr::' . $key } = sub { $val };
     }
 }
 
 sub empty_air {
     my ($pkg) = caller(0);
-    my $symbol_tbl = $pkg . '::AirRead::attr';
+    my $symbol_tbl = $pkg . '::AirRead::attr::';
     foreach my $symbol ( keys %$symbol_tbl ) {
         delete $symbol_tbl->{$symbol};
     }
