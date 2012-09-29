@@ -1,4 +1,7 @@
 Revision history for Perl extension Acme::AirRead
 
+0.02    Sun Sep 30 00:30:00 2012
+        - mod example code in POD
+
 0.01    Tue Oct 25 02:42:58 2011
         - original version

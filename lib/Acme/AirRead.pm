@@ -3,7 +3,7 @@ package Acme::AirRead;
 use strict;
 use warnings;
 no strict 'refs';
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 our $NO_READ = qr{air|luft};
 
 sub import {
@@ -55,17 +55,15 @@ Acme::AirRead - accessor for reading air.
 
   use Acme::AirRead;
 
-  write_air(any_key => 'any_word');
-  my $word = read_air('any_key'); # undef
+  write_air(
+      air     => 'cant read air',
+      declair => 'cant read near air',
+      kuki    => 'can read',
+  );
 
-  write_air(air => 'any_word');
-  $word = read_air();       # 'any_word'
-  $word = read_air('air');  # 'any_word'
-
-  empty_air();
-  $word = read_air('any_key');  # undef
-  $word = read_air();           # undef
-  $word = read_air('air');      # undef
+  $air     = read_air('air');     # undef
+  $declair = read_air('declair'); # undef
+  $kuki    = read_air('kuki');    # can read
 
 =head1 DESCRIPTION
 
