@@ -3,7 +3,7 @@ package Acme::AirRead;
 use strict;
 use warnings;
 no strict 'refs';
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 our $NO_READ = qr{air|luft};
 
 sub import {
@@ -68,6 +68,8 @@ Acme::AirRead - accessor for reading air.
 =head1 DESCRIPTION
 
 Acme::AirRead is accessor for reading air.
+
+If you set key like 'air' and any value, this value will be not set and can't read.
 
 detail is reading air.
 
